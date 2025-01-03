@@ -18,6 +18,7 @@
         module: file
         path: /tmp/ansible_results
         state: directory
+        mode: '0777'
       delegate_to: localhost
 
     - name: Save results to a local file
