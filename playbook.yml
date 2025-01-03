@@ -1,0 +1,30 @@
+---
+- name: Fetching the resulted data from the remote servers into our local machine
+  hosts: webservers
+  become: false
+  vars_files: 
+    - vars.yml
+  tasks: 
+    - name: Get Python version
+      shell: python3 --version
+      register: python_version
+
+    - name: Get IP address of the remote server
+      shell: hostname -I | awk '{print $1}'
+      register: server_ip_address
+
+    - name: Ensure the destination directory exists
+      local_action: 
+        module: file
+        path: /etc/ansible/playbooks
+        state: directory
+      delegate_to: localhost
+
+    - name: Save results to a local file
+      local_action: 
+        module: copy
+        content: |
+          Python Version: {{ python_version.stdout }}
+          IP Address: {{ server_ip_address.stdout }}
+        dest: /etc/ansible/playbooks/Result_from_semaphore.txt
+      delegate_to: localhost
