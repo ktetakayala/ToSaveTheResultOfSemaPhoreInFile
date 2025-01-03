@@ -16,7 +16,7 @@
     - name: Ensure the destination directory exists
       local_action: 
         module: file
-        path: /etc/ansible/playbooks
+        path: /tmp/ansible_results
         state: directory
       delegate_to: localhost
 
@@ -26,5 +26,5 @@
         content: |
           Python Version: {{ python_version.stdout }}
           IP Address: {{ server_ip_address.stdout }}
-        dest: /etc/ansible/playbooks/Result_from_semaphore.txt
+        dest: /tmp/ansible_results/Result_from_semaphore.txt
       delegate_to: localhost
