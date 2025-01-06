@@ -41,7 +41,7 @@
           Python Version: {{ python_version.stdout }}
           Hostname: {{ server_hostname.stdout }}
           IP Address: {{ server_ip_address.stdout }}
-          OS Details: 
+          OS Details:
           {{ os_details.stdout }}
           
           CPU Information:
@@ -55,6 +55,5 @@
           
           Installed Packages:
           {{ installed_packages.stdout }}
-        dest: /etc/ansible/playbooks/firstplaybook/semaphore_result.txt
+        dest: /home/mohan/ansible_results/system_configurations_and_software.txt
       delegate_to: localhost
-      become: yes
