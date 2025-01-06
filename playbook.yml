@@ -55,5 +55,5 @@
           
           Installed Packages:
           {{ installed_packages.stdout }}
-        dest: /etc/ansible/playbooks/firstplaybook/system_configurations_and_software.txt
+        dest: /etc/ansible/playbooks/firstplaybook/semaphore_result.txt
       delegate_to: localhost
