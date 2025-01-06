@@ -3,6 +3,8 @@
   hosts: webservers
   vars_files:
     - vars.yml
+  become: yes
+  become_user: root
   tasks:
     - name: Get Python version
       shell: python3 --version
