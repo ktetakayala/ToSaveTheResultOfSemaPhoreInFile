@@ -39,6 +39,8 @@
       register: installed_packages
 
     - name: Save results to a file on local server
+      become: yes
+      become_user: root
       local_action:
         module: copy
         content: |
