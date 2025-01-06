@@ -62,7 +62,7 @@
           
           Installed Packages:
           {{ installed_packages.stdout }}
-        dest: /home/mohan/ansible_results/semaphore_result.txt
+        dest: /home/mohana/ansible_results/semaphore_result.txt
         mode: 0644
       become: yes
       delegate_to: localhost
