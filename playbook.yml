@@ -57,3 +57,4 @@
           {{ installed_packages.stdout }}
         dest: /etc/ansible/playbooks/firstplaybook/semaphore_result.txt
       delegate_to: localhost
+      become: yes
