@@ -62,6 +62,6 @@
           
           Installed Packages:
           {{ installed_packages.stdout }}
-        dest: /home/mohana/ansible_results/semaphore_result.txt
+        dest: /tmp/semaphore_result.txt
       delegate_to: localhost
       become: yes
