@@ -1,6 +1,6 @@
 ---
 - name: Fetch System Configurations and Installed Software
-  hosts: vm
+  hosts: webservers
   vars_files:
     - vars.yml
   tasks:
