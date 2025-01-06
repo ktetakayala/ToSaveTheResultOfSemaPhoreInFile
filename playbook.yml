@@ -1,31 +1,61 @@
 ---
-- name: Fetching the resulted data from the remote servers into our local machine
-  hosts: webservers
-  become: false
-  vars_files: 
+- name: Fetch System Configurations and Installed Software
+  hosts: vm
+  vars_files:
     - vars.yml
-  tasks: 
+  tasks:
     - name: Get Python version
       shell: python3 --version
       register: python_version
+
+    - name: Get hostname
+      command: hostname
+      register: server_hostname
 
     - name: Get IP address of the remote server
       shell: hostname -I | awk '{print $1}'
       register: server_ip_address
 
-    - name: Ensure the destination directory exists
-      local_action: 
-        module: file
-        path: /tmp/ansible_results
-        state: directory
-        mode: '0777'
-      delegate_to: localhost
+    - name: Get operating system details
+      command: cat /etc/os-release
+      register: os_details
 
-    - name: Save results to a local file
-      local_action: 
+    - name: Get CPU information
+      shell: lscpu
+      register: cpu_info
+
+    - name: Get memory information
+      shell: free -h
+      register: memory_info
+
+    - name: Get disk usage
+      shell: df -h
+      register: disk_usage
+
+    - name: Get list of installed packages
+      shell: dpkg -l
+      register: installed_packages
+
+    - name: Save results to a file on local server
+      local_action:
         module: copy
         content: |
           Python Version: {{ python_version.stdout }}
+          Hostname: {{ server_hostname.stdout }}
           IP Address: {{ server_ip_address.stdout }}
-        dest: /tmp/ansible_results/Result_from_semaphore.txt
+          OS Details: 
+          {{ os_details.stdout }}
+          
+          CPU Information:
+          {{ cpu_info.stdout }}
+          
+          Memory Information:
+          {{ memory_info.stdout }}
+          
+          Disk Usage:
+          {{ disk_usage.stdout }}
+          
+          Installed Packages:
+          {{ installed_packages.stdout }}
+        dest: /etc/ansible/playbooks/firstplaybook/system_configurations_and_software.txt
       delegate_to: localhost
