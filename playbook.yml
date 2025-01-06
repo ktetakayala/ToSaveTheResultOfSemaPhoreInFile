@@ -1,8 +1,6 @@
 ---
 - name: Fetch System Configurations and Installed Software
-  hosts: vm
-  vars_files:
-    - vars.yml
+  hosts: webservers
   tasks:
     - name: Get Python version
       shell: python3 --version
