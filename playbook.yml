@@ -62,8 +62,7 @@
           
           Installed Packages:
           {{ installed_packages.stdout }}
-        dest: /tmp/semaphore_result.txt
-        remote_src: true
+        dest: /home/mohana/semaphore_result.txt
         mode: 0644
       delegate_to: localhost
       become: yes
